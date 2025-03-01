@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>uploadDoc</title>
+    <link rel="stylesheet" href="../styles/uploadFile.css">
+    <script src="../scripts/uploadFile.js"></script>
+</head>
+<body>
+    <div class="credit-container">
+        <span id="creditDisplay" value="20">Credits: 20</span>
+    </div>
+    <div class="upload-container">
+        <h2>Upload a Document</h2>
+        <div class="upload-box" id="uploadBox" onclick="document.getElementById('fileInput').click()">
+            Click to Upload
+            <img id="previewImage" alt="Image Preview">
+        </div>
+        <input type="file" id="fileInput" style="display: none;" onchange="previewFile(event)">
+        <button class="btn" onclick="uploadFile()">Submit</button>
+    </div>
+
+</body>
+</html>

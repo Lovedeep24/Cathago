@@ -10,49 +10,96 @@ function toggleForm() {
         signupContainer.style.display = 'block';
     }
 }
+ 
+
 
 async function login(event) {
-    event.preventDefault();
-    window.location.href = 'userInfo.html';
-    // const email = document.getElementById('email').value;
-    // const password = document.getElementById('password').value;
-    
-    // const response = await fetch('http://localhost:5000/api/login', {
-    //     method: 'POST',
-    //     headers: { 'Content-Type': 'application/json' },
-    //     body: JSON.stringify({ email, password })
-    // });
-    // if(response.status === 200)
-    // {
-    //     alert("Login successfull");
-    //     window.location.href = 'user.html';
-    // }
-    // else{
-    //     alert("Login failed");
-    // }
-    // const data = await response.json();
-    // alert(data.message);
+    try {
+        event.preventDefault();
+        console.log("Form submission prevented");
+        
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        const role = document.querySelector('input[name="role"]:checked').value;
+
+        if (!email || !password) {
+            alert("Must enter email and password");
+            return;
+        }
+
+        console.log("Sending request...");
+        const response = await fetch('http://localhost:3000/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password ,role})
+        });
+
+        console.log("Response received", response);
+        
+        if (response.status === 200) {
+            const data = await response.json();
+            // console.log("Login successful, redirecting...");
+            if(role === 'admin')
+            {
+                localStorage.setItem("token", data.accessToken);
+                window.location.href = 'admin.html';
+            }
+            else if(role === 'user')
+            {
+                localStorage.setItem("token", data.accessToken);
+                localStorage.setItem("userId", data.userId);  
+                window.location.href = 'uploadFile.html';
+            }
+            else{
+                alert("Not Authorised");
+            }
+        } else if(response.status === 401) {
+            alert("Unauthorized Access");
+        }else if(response.status === 404) {
+            alert("Email not registerd");
+        }else if(response.status === 402) {
+            alert("Invalid Password");
+        }
+        else{
+            alert("Login Failed");
+        }
+    } catch (error) {
+        console.error("Error during login:", error);
+        alert("An error occurred, please try again.");
+    }
 }
+
 
 async function signup(event) {
     event.preventDefault();
+
     const email = document.getElementById('signupEmail').value;
+    const userName = document.getElementById('name').value;
     const password = document.getElementById('signupPassword').value;
     const confirmpassword = document.getElementById('confirmPassword').value;
-    
-    if(password === confirmpassword)
+    console.log(email,userName,password,confirmpassword);
+    if(!email || !userName || !password || !confirmpassword)
     {
-        const response = await fetch('http://localhost:5000/api/signup', {
+        alert("All Fields are Required")
+    }
+    else if(password === confirmpassword)
+    {
+        var response = await fetch('http://localhost:3000/register', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password })
+            body: JSON.stringify({ userName,email, password })
         });
-        
     }
     else{
         alert("Password do not match");
     }
+    console.log(response);
+    if(response.status === 200)
+    {
+        alert("Signed Up successfully");
+        window.location.href = 'login.html';
+    }else{
+        alert("something went wrong");
+    }
   
-    const data = await response.json();
-    alert(data.message);
-}
+} 

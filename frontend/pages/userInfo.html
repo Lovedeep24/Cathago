@@ -8,19 +8,25 @@
    <script src="../scripts/userInfo.js" ></script>
 </head>
 <body>
-    <div class="greeting">Hello, <span id="userName">User</span>!</div>
+    <div class="mainDiv">
+        <div class="navbar">
+            <div class="greeting">Hello, <span id="userName">User</span>!</div>
+            <div class="profile-container">
+                <p><strong>Credits:</strong> <span id="creditDisplay">20</span></p>
+                <button class="btn" onclick="requestMoreCredits()">Request More Credits</button>
+            </div>
+        </div>
     
-    <div class="profile-container">
-        <h3>User Profile</h3>
-        <p><strong>Credits:</strong> <span id="creditDisplay">20</span></p>
-        <button class="btn" onclick="requestMoreCredits()">Request More Credits</button>
+        <div class="searchSection">
+            <div class="searches">
+                <h3>Past Scans</h3>
+                <ul id="recentSearches">
+                    <li>No Past searches</li>
+                </ul>
+            </div>
+            
+        </div>
     </div>
-
-    <div class="section">
-        <h3>Recent Searches</h3>
-        <ul id="recentSearches">
-            <li>No recent searches</li>
-        </ul>
-    </div>
+    
 </body>
 </html>

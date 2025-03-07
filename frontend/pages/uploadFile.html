@@ -5,20 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>uploadDoc</title>
     <link rel="stylesheet" href="../styles/uploadFile.css">
-    <script src="../scripts/uploadFile.js"></script>
+    <script defer src="../scripts/uploadFile.js"></script>
 </head>
 <body>
     <div class="credit-container">
         <span id="creditDisplay" value="20">Credits: 20</span>
     </div>
     <div class="upload-container">
-        <h2>Upload a Document</h2>
+        <p class="head">Scan the Document</p>
+        <p class="desc">Upload or drag a text doucument file</p>
         <div class="upload-box" id="uploadBox" onclick="document.getElementById('fileInput').click()">
-            Click to Upload
-            <img id="previewImage" alt="Image Preview">
+            <span class="slc">Select File</span>or Drop here
+            <!-- <img id="previewImage" alt="Image Preview"> -->
         </div>
-        <input type="file" id="fileInput" style="display: none;" onchange="previewFile(event)">
-        <button class="btn" onclick="uploadFile()">Submit</button>
+        <input type="file" id="fileInput" style="display: none;">
+        <button class="btn" type="button" onclick="scanFile(event);  return false;">Submit</button>
     </div>
 
 </body>

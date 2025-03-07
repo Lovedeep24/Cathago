@@ -1,90 +1,109 @@
 
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            flex-direction: column;
-            position: relative;
-        }
-        .credit-container {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: white;
-            padding: 10px 15px;
-            border-radius: 5px;
-            box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-            font-weight: bold;
-        }
-        .credit-dropdown {
-            background: white;
-            border: 1px solid #ccc;
-            padding: 5px;
-            cursor: pointer;
-        }
-        .credit-dropdown option {
-            background: white;
-            color: green;
-        }
-        .upload-container {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
-            text-align: center;
-        }
-        .upload-box {
-            width: 100%;
-            height: 200px;
-            border: 2px dashed #007bff;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            margin-bottom: 15px;
-            color: #007bff;
-            font-weight: bold;
-            position: relative;
-            overflow: hidden;
-        }
-        .upload-box img {
-            max-width: 100%;
-            max-height: 100%;
-            display: none;
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        .input-group {
-            margin-bottom: 15px;
-            text-align: left;
-        }
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-            font-weight: bold;
-        }
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-        .btn {
-            width: 100%;
-            padding: 10px;
-            border: none;
-            background: #007bff;
-            color: white;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .btn:hover {
-            background: #0056b3;
-        }
+body {
+    font-family: Arial, sans-serif;
+    /* background-color: black; */
+    /* background: linear-gradient(to right,135deg, white, lightblue);  */
+    /* background: linear-gradient(135deg, #e0f7fa, #80deea); */
+    background: url('../assets/bgImage.jpg') no-repeat center center fixed;
+    background-size: cover;
+    /* border: 2px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    flex-direction: column;
+}
+.credit-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background:#6FD096;
+    padding: 10px 15px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    font-weight: bold;
+}
+
+.credit-dropdown {
+    background: white;
+    border: 1px solid #ccc;
+    padding: 5px;
+    cursor: pointer;
+}
+.credit-dropdown option {
+    background: white;
+    color: green;
+}
+.upload-container {
+    background: #121212;
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    text-align: center;
+}
+.head{
+    font-size: x-large;
+}
+.desc{
+    color:#5B5B5B
+}
+.upload-box {
+    width: 100%;
+    height: 300px;
+    border: 2px dashed #6FD096;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 15px;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+}
+.upload-box img {
+    max-width: 100%;
+    max-height: 100%;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+.input-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.btn {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background: #6FD096;
+    color: black;
+    font-weight: 600;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.slc{
+    color:#6FD096;
+    margin-right: 3px;
+}
+.file-selected {
+    background-color: #f0f0f0;
+    opacity: 0.7;
+    transition: opacity 0.3s ease-in-out;
+}

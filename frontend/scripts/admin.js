@@ -18,10 +18,8 @@ async function getUserStats(){
             }
         });
         const data =await response.json();
-        console.log(data);
         if(response.status === 200)
         {
-            console.log("user Stats fetched successfully");
             renderUserStats(data);
         }
         else{
@@ -37,7 +35,6 @@ async function getUserStats(){
 
 function renderUserStats(userData){
     const userTable= document.getElementsByClassName("user-table")[0];
-    console.log(userTable);
     userTable.innerHTML= '';
 
     if(userData.length<1)
@@ -70,7 +67,6 @@ async function fetchTopUsers() {
             }
         }); // Replace with your backend route for top users
         const data = await response.json();
-        console.log("Top Users:", data);
         renderTopUsers(data);
     } catch (error) {
         console.error('Error fetching top users:', error);
@@ -107,7 +103,6 @@ async function fetchTopTopics() {
             }
         }); 
         const data = await response.json();
-        console.log("Top Topics:", data);
         renderTopTopics(data);
     } catch (error) {
         console.error('Error fetching top topics:', error);
@@ -144,7 +139,6 @@ async function fetchUserRequests() {
             }
         }); // Replace with your backend route
         const data = await response.json();
-        console.log(data);
 
         renderRequests(data);
     } catch (error) {
@@ -157,8 +151,6 @@ async function fetchUserRequests() {
 
 function renderRequests(users) {
     const mainDiv=document.getElementById("creditReq");
-    // mainDiv.innerHTML = '';
-    console.log(mainDiv);
     if(users.length<1)
     {
         mainDiv.innerHTML=`<p>No request</p>`
@@ -192,7 +184,6 @@ async function approveUser(userId) {
     const creditInput = document.getElementById(`creditInput-${userId}`);
     const assignedCredits = creditInput.value; 
  
-    // console.log(`User ID: ${userId}, Assigned Credits: ${assignedCredits}`);
 
 try {
     const token=localStorage.getItem("token");
@@ -210,7 +201,6 @@ try {
     // const data=await response.json();
     if(response.status === 200)
         {
-            console.log("SUCCESSFULLY CRedited");
             removeUserDiv(userId);
         } 
 } catch (error) {
@@ -235,13 +225,11 @@ async function rejectUser(userId) {
         // const data=await response.json()  ;
         if(response.status === 200)
             {
-                console.log("SDeclined Request");
                 removeUserDiv(userId);
             } 
     } catch (error) {
         console.error(error);
     }
-    // console.log(`User ID ${userId} rejected`);
 }
 
 
@@ -252,10 +240,6 @@ function removeUserDiv(userId){
     if(divId)
     {
         divId.remove();
-        console.log("removed Div");
     }
-    else{
-        console.log("could not delete");
-}
 
 }

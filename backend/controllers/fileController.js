@@ -43,10 +43,9 @@ const fileController = {
             const {userId} = req.params;
             let User = readFile(userFilePath);
             let userIndex = User.users.findIndex(user=> user.userId === userId);
-            if(!userIndex){
+            if(userIndex<0){
                 return res.json({error: 'User not found'});
             }
-            console.log(User.users[userIndex].credits);
             if(User.users[userIndex].credits <= 0){
                 return res.json({error: 'Insufficient credits'});
             }

@@ -7,8 +7,6 @@ let requestStatus = null;
 async function fetchUserDetails(){
     const token=localStorage.getItem("token");
     const userId=localStorage.getItem("userId");
-    console.log("userid: ",userId);
-    console.log("token: ",token);
     try {
         const response = await fetch(`http://localhost:3000/userprofile/${userId}`,{
             method: 'GET',
@@ -18,12 +16,9 @@ async function fetchUserDetails(){
             }
         });
         const data=await response.json();
-        console.log(data);
         requestStatus=data.creditRequest;
-        console.log(requestStatus);
         if(response.status === 200)
         {
-            console.log("user data fetcehd successfully");
             renderUserData(data);
         }
         

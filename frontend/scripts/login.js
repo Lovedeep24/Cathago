@@ -21,7 +21,6 @@ async function handlelogin(){
     const email=document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const role = document.querySelector('input[name="role"]:checked')?.value;
-    console.log(email,password,role);
 
     if(!email || !password)
     {
@@ -35,7 +34,6 @@ async function handlelogin(){
         body: JSON.stringify({email,password,role})
     });
     const data=await response.json();
-    console.log(data);
     localStorage.setItem("token",data.accessToken);
     localStorage.setItem("userId",data.userId);
 
@@ -73,7 +71,6 @@ async function signup(event) {
     const userName = document.getElementById('name').value;
     const password = document.getElementById('signupPassword').value;
     const confirmpassword = document.getElementById('confirmPassword').value;
-    console.log(email,userName,password,confirmpassword);
     if(!email || !userName || !password || !confirmpassword)
     {
         alert("All Fields are Required")
@@ -89,7 +86,6 @@ async function signup(event) {
     else{
         alert("Password do not match");
     }
-    console.log(response);
     if(response.status === 200)
     {
         alert("Signed Up successfully");

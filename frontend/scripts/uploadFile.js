@@ -9,8 +9,6 @@ let requestStatus = null;
 async function fetchUserDetails(){
     const token=localStorage.getItem("token");
     const userId=localStorage.getItem("userId");
-    // console.log("userid: ",userId);
-    // console.log("token: ",Token);
     try {
         const response = await fetch(`http://localhost:3000/userprofile/${userId}`,{
             method: 'GET',
@@ -20,11 +18,9 @@ async function fetchUserDetails(){
             }
         });
         const data=await response.json();
-        // console.log(data);
         requestStatus=data.creditRequest;
         if(response.status === 200)
         {
-            // console.log("user data fetcehd successfully");
             renderUserData(data);
         }
         else{
@@ -78,10 +74,8 @@ async function handleCreditReq()
 
 async function handleScan(){
     const userId=localStorage.getItem("userId");
-    console.log("userId",userId);
     const docId=localStorage.getItem("docId");
     const token=localStorage.getItem("token");
-    console.log("docId:",docId);
  
     const scanBtn=document.getElementById("btn");
     scanBtn.innerHTML="Scanning..."
@@ -94,8 +88,6 @@ async function handleScan(){
     });
     const data= await response.json();
     if (response.status === 200) {
-        console.log("Scan Response:", data);
-        // console.log("INCOMING",data.scannedFile);
         localStorage.setItem("incomingData", data.maxMatchContent);
         localStorage.setItem("matchPer", data.maxMatch);
         // alert("SUCCESS");
@@ -140,10 +132,7 @@ async function uploadFile() {
     const file = fileInput.files[0];
     const token = localStorage.getItem("token"); 
     const userId = localStorage.getItem("userId");
-    console.log(token);
-    console.log(userId);
     const fileContent = await file.text(); 
-   console.log(file.name);
    const response = await fetch('http://localhost:3000/upload',{
        method:"POST",
        body:await fileContent,
@@ -154,9 +143,7 @@ async function uploadFile() {
             "Content-Type": "text/plain"
        }
    });
-   console.log("Response: ",response);
      const data = await response.json();
-     console.log("DATA: ",data);
        if(response.status === 200)
        {
         localStorage.setItem("docId",data.scanId);

@@ -4,9 +4,9 @@ const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 const { registerController, loginController, fileController, userController, adminController } = require('../controllers/index')
 
-router.post('/register',auth, registerController.register);
+router.post('/register',registerController.register);
 router.post('/login', loginController.login);
-router.post('/upload', fileController.upload);
+router.post('/upload', auth,fileController.upload);
 router.get('/userprofile/:userId',auth, userController.userProfile);
 router.get('/match/:docId/:userId',auth,fileController.match);
 router.patch('/creditRequest/:userId' ,auth,userController.creditRequest);

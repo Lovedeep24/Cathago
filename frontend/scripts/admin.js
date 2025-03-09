@@ -202,6 +202,7 @@ try {
     if(response.status === 200)
         {
             removeUserDiv(userId);
+            location.reload();
         } 
 } catch (error) {
     console.error(error);
@@ -226,6 +227,7 @@ async function rejectUser(userId) {
         if(response.status === 200)
             {
                 removeUserDiv(userId);
+                location.reload();
             } 
     } catch (error) {
         console.error(error);

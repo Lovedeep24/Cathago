@@ -103,7 +103,6 @@ async function handleScan(){
 document.getElementById("fileInput").addEventListener("change", handleUpload);
 async function handleUpload()
 {
-
     const fileInput = document.getElementById("fileInput"); 
     const file = fileInput.files[0];                        
     const uploadBox = document.getElementById("uploadBox"); 
@@ -128,6 +127,7 @@ async function handleUpload()
 
 async function uploadFile() {
     try {
+    const Btn=document.getElementById("btn");
     const fileInput = document.getElementById("fileInput");
     const file = fileInput.files[0];
     const token = localStorage.getItem("token"); 
@@ -148,6 +148,7 @@ async function uploadFile() {
        {
         localStorage.setItem("docId",data.scanId);
         localStorage.setItem("userContent",data.content);
+        Btn.disabled = false;
         alert("upload Successfull");
         }
         else{

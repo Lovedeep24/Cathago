@@ -87,9 +87,11 @@ async function handleScan(){
         }
     });
     const data= await response.json();
+    let str = data.maxMatch;  
+    let percent = parseFloat(str.replace(/[^0-9.]/g, ''));  
     if (response.status === 200) {
         localStorage.setItem("incomingData", data.maxMatchContent);
-        localStorage.setItem("matchPer", data.maxMatch);
+        localStorage.setItem("matchPer", percent);
         // alert("SUCCESS");
         window.location.href = 'scan.html';
     } else {

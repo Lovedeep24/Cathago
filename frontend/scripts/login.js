@@ -1,3 +1,6 @@
+
+//---------------------------------------------S W I T C H I N G    L O G I N     A N D     S I G N U P----------------------------------------------------------------
+
 function toggleForm() {
     const loginContainer = document.getElementById('loginContainer');
     const signupContainer = document.getElementById('signupContainer');
@@ -12,63 +15,56 @@ function toggleForm() {
 }
  
 
+//------------------------------------------------------------------L O G I N-----------------------------------------------------------------------------------
 
-async function login(event) {
-    try {
-        event.preventDefault();
-        console.log("Form submission prevented");
-        
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const role = document.querySelector('input[name="role"]:checked').value;
+async function handlelogin(){
+    const email=document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const role = document.querySelector('input[name="role"]:checked')?.value;
+    console.log(email,password,role);
 
-        if (!email || !password) {
-            alert("Must enter email and password");
-            return;
+    if(!email || !password)
+    {
+        alert("All fields Required");
+        return
+    }
+
+    const response = await fetch("http://localhost:3000/login",{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({email,password,role})
+    });
+    const data=await response.json();
+    console.log(data);
+    localStorage.setItem("token",data.accessToken);
+    localStorage.setItem("userId",data.userId);
+
+    if (response.status === 200)
+        {       
+        if(role === 'admin')
+        {
+            window.location.href = 'admin.html';
         }
-
-        console.log("Sending request...");
-        const response = await fetch('http://localhost:3000/login', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ email, password ,role})
-        });
-
-        console.log("Response received", response);
-        
-        if (response.status === 200) {
-            const data = await response.json();
-            // console.log("Login successful, redirecting...");
-            if(role === 'admin')
-            {
-                localStorage.setItem("token", data.accessToken);
-                window.location.href = 'admin.html';
-            }
-            else if(role === 'user')
-            {
-                localStorage.setItem("token", data.accessToken);
-                localStorage.setItem("userId", data.userId);  
-                window.location.href = 'uploadFile.html';
-            }
-            else{
-                alert("Not Authorised");
-            }
-        } else if(response.status === 401) {
-            alert("Unauthorized Access");
-        }else if(response.status === 404) {
-            alert("Email not registerd");
-        }else if(response.status === 402) {
-            alert("Invalid Password");
+        else if(role === 'user')
+        {
+            window.location.href = 'userInfo.html';
         }
         else{
-            alert("Login Failed");
+            alert("Not Authorised");
         }
-    } catch (error) {
-        console.error("Error during login:", error);
-        alert("An error occurred, please try again.");
+    } else if(response.status === 401) {
+        alert("Unauthorized Access");
+    }else if(response.status === 404) {
+        alert("Email not registerd");
+    }else if(response.status === 402) {
+        alert("Invalid Password");
+    }
+    else{
+        alert("Login Failed");
     }
 }
-
+ 
+//-------------------------------------------------------------------S I G N U P ---------------------------------------------------------------------
 
 async function signup(event) {
     event.preventDefault();
@@ -98,6 +94,8 @@ async function signup(event) {
     {
         alert("Signed Up successfully");
         window.location.href = 'login.html';
+    }else if(response.status === 400){
+        alert("Email already registered");
     }else{
         alert("something went wrong");
     }

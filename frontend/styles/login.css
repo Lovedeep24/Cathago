@@ -24,6 +24,12 @@ body {
     /* border: 2px solid blue; */
     height: auto;
 }
+.infoBox{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
 .container {
     padding: 20px;
     height: auto;
@@ -47,7 +53,7 @@ form{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: center; 
 }
 .input-group label {
     color: white;

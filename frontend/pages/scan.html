@@ -5,19 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="../styles/scan.css"></link>
-    <script src="../scripts/scan.js"></script>
+    <script defer src="../scripts/scan.js"></script>
 </head>
 <body>
-    <div class="mainDiv">
-        <div class="userContent">
-            USER CONTENT
+    <div class="navbar">
+            <h1 class="heading" >Scanning Result Dashboard</h1>
+            <button onclick="handleProfile()">
+                User Profile
+            </button>
+       
+    </div>  
+        <div class="scanData">
+            <div id="userContentDiv">
+                <h2>Your Content</h2>
+                <p id="userContent">MATCHING CONTENT</p> 
+            </div>
+            <div id="matchingPer">
+                <p><span id="matching"></span>%  match</p>
+            </div>
+            <div id="matchContentDiv">
+            <h2>Matched Content</h2>
+            <p id="matchContent">MATCHING CONTENT</p>    
+            </div>
         </div>
-        <div class="matching">
-            80% MATCH
-        </div>
-        <div class="matchContent">
-        MATCHING CONTENT    
-        </div>
-    </div>
+    
 </body>
 </html>

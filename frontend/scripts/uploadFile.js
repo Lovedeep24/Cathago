@@ -1,13 +1,124 @@
-document.getElementById("fileInput").addEventListener("change", handleFileChange);
+document.addEventListener("DOMContentLoaded", ()=>{
+    fetchUserDetails();
+});
+let requestStatus = null;
 
-async function handleFileChange() {
 
-    const fileInput = document.getElementById("fileInput");
-    const file = fileInput.files[0];
-    const uploadBox = document.getElementById("uploadBox");
 
-    if (file) {
+//----------------------------------------------------------F E T C H I N G    U S E R      D A T A-------------------------------------------------------------------
+async function fetchUserDetails(){
+    const token=localStorage.getItem("token");
+    const userId=localStorage.getItem("userId");
+    // console.log("userid: ",userId);
+    // console.log("token: ",Token);
+    try {
+        const response = await fetch(`http://localhost:3000/userprofile/${userId}`,{
+            method: 'GET',
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        });
+        const data=await response.json();
+        // console.log(data);
+        requestStatus=data.creditRequest;
+        if(response.status === 200)
+        {
+            // console.log("user data fetcehd successfully");
+            renderUserData(data);
+        }
+        else{
+            console.log("user data not fetched")
+        }
+    } catch (error) {
+        console.error(`error:`,error);
+    }
+}
+//-------------------------------------------------R E N D E R I N G    U S E R     D A T A---------------------------------------------------
+function renderUserData(data){
+    const credits=document.getElementById("creditDisplay");
+    credits.innerHTML=`${data.credits}`;
+}
+
+//--------------------------------------------H A N D L I N G    C R E D I T S     R E Q U E S t-------------------------------------------
+async function handleCreditReq()
+{
+    const userId=localStorage.getItem("userId");
+    const token=localStorage.getItem("token");
+    try {
+        if(requestStatus === true)
+        {
+            alert("You have Requested for Credit already");
+            return
+        }
+        const response = await fetch(`http://localhost:3000/creditRequest/${userId}`,{
+            method: 'PATCH',
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        });
+        if(response.status === 200)
+        {
+            alert("Credeit request sent");
+        }
+        else{
+            alert("Could not send Credit request Try again");
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+ function handleProfile(){
+
+    window.location.href = 'userInfo.html';
+}
+
+async function handleScan(){
+    const userId=localStorage.getItem("userId");
+    console.log("userId",userId);
+    const docId=localStorage.getItem("docId");
+    const token=localStorage.getItem("token");
+    console.log("docId:",docId);
+ 
+    const scanBtn=document.getElementById("btn");
+    scanBtn.innerHTML="Scanning..."
+    const response = await fetch(`http://localhost:3000/match/${docId}/${userId}`,{
+        method: 'GET',
+        headers: {
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
+        }
+    });
+    const data= await response.json();
+    if (response.status === 200) {
+        console.log("Scan Response:", data);
+        // console.log("INCOMING",data.scannedFile);
+        localStorage.setItem("incomingData", data.maxMatchContent);
+        localStorage.setItem("matchPer", data.maxMatch);
+        // alert("SUCCESS");
+        window.location.href = 'scan.html';
+    } else {
+        alert("Error in scanning, please try again.");
+    }
+    // window.location.href = 'scan.html';
+}
+///---------------------------------------------C H E C K I N G     F I L E      F O R M A T----------------------------------------------------
+
+
+document.getElementById("fileInput").addEventListener("change", handleUpload);
+async function handleUpload()
+{
+
+    const fileInput = document.getElementById("fileInput"); 
+    const file = fileInput.files[0];                        
+    const uploadBox = document.getElementById("uploadBox"); 
+
+    if (file) {                                                        
         uploadBox.innerHTML = `${file.name}`;
+        await uploadFile();              
     } 
 
     if (!file) {
@@ -19,110 +130,46 @@ async function handleFileChange() {
         alert("Only .txt files are allowed!");
         return;
     }
- 
        
-    }
+}
   
 
-async function scanFile(event) {
-    debugger;
+async function uploadFile() {
     try {
-        event.preventDefault();
-
-        const fileInput = document.getElementById("fileInput");
-        const file = fileInput.files[0];
-        if(!file)
-        {
-            alert("Please Select file");
-        }
-        const token = localStorage.getItem("token"); 
-        const userId = localStorage.getItem("userId");
-        console.log(token);
-    //    const formData = new FormData();
-    //    formData.append("file", file);
-    const fileText = await file.text(); 
-       console.log(file.name);
-       const response = await fetch('http://localhost:3000/upload',{
-           method:"POST",
-           body:await fileText,
-           headers: {
-               "userId": userId,
-               "file-name": file.name,
-               "Authorization": `Bearer ${token}`
-           }
-       });
-       console.log(response);
-    const text = await response.text();
-    console.log("Raw Response:", text);
-
-    let data;
-    try {
-        data = JSON.parse(text);  // Manually parse JSON
-        console.log("Parsed Data:", data);
-    } catch (error) {
-        console.error("JSON Parsing Error:", error);
-    }
+    const fileInput = document.getElementById("fileInput");
+    const file = fileInput.files[0];
+    const token = localStorage.getItem("token"); 
+    const userId = localStorage.getItem("userId");
+    console.log(token);
+    console.log(userId);
+    const fileContent = await file.text(); 
+   console.log(file.name);
+   const response = await fetch('http://localhost:3000/upload',{
+       method:"POST",
+       body:await fileContent,
+       headers: {
+           "userId": userId,
+           "filename": file.name,
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "text/plain"
+       }
+   });
+   console.log("Response: ",response);
+     const data = await response.json();
+     console.log("DATA: ",data);
        if(response.status === 200)
        {
-        //    console.log(data);
+        localStorage.setItem("docId",data.scanId);
+        localStorage.setItem("userContent",data.content);
         alert("upload Successfull");
         }
         else{
             console.log('error in scanning');
         }
-    } catch (error) {
-        console.error("Error during scan:", error);
-        alert("An error occurred, please try again.");
-    }
-
+} catch (error) {
+    console.error("Error during upload:", error);
+    alert("An error occurred, please try again.");
+}
     
 }
 
-
-// async function scanFile1(event) {
-//     event.preventDefault();
-
-//     const fileInput = document.getElementById("fileInput");
-//     const file = fileInput.files[0];
-//     const token = localStorage.getItem("token"); 
-//     const userId = localStorage.getItem("userId");
-//    const formData = new FormData();
-//    formData.append("file", file);
-//    console.log(file.name);
-//    const response = await fetch('http://localhost:3000/upload',{
-//        method:"POST",
-//        body:formData,
-//        headers: {
-//            "userId": userId,
-//            "file-name": file.name,
-//            "Authorization": `Bearer ${token}`
-//        }
-//    });
-//    const data = await response.json();
-//    if(response.status === 200)
-//    {
-//        console.log(data);
-       // localStorage.setItem("content", data.fileContent);
-       // localStorage.setItem("docId", data._id);
-         // const userId = localStorage.getItem("userId");
-    // const token = localStorage.getItem("token"); 
-    // const docId = localStorage.getItem("docId");
-       // console.log("inside success");
-       // // alert("File is uploaded!");
-       // const newresponse = await fetch(`http://localhost:3000/match/?docId=${docId}`,{
-       //     method:"POST",
-       //     headers: {
-       //         "Authorization": `Bearer ${token}`
-       //     },
-       //     body: JSON.stringify({ userId }) 
-       // });
-       // const newdata = await NEWresponse.json();
-       // localStorage.setItem("matchPercent", newdata.maxMatch);
-       // localStorage.setItem("matchContent", newdata.maxMatchContent);
-       // localStorage.setItem("userContent", newdata.fileContent);
-       // window.location.href = 'scan.html';
-//    }
-//    else{
-//        alert("not uploaded");
-//    }
-// }

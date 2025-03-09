@@ -2,12 +2,72 @@ document.addEventListener("DOMContentLoaded", ()=>{
     fetchUserRequests();
     fetchTopUsers();
     fetchTopTopics();
-
+    getUserStats();
 });
+
+//------------------------------------------------------G E T T I N G   U S E R   S T A T S--------------------------------------------------------
+
+async function getUserStats(){
+    const token=localStorage.getItem("token");
+    try {
+        const response = await fetch('http://localhost:3000/analytics',{
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        });
+        const data =await response.json();
+        console.log(data);
+        if(response.status === 200)
+        {
+            console.log("user Stats fetched successfully");
+            renderUserStats(data);
+        }
+        else{
+            console.log("Internal Server Error");
+        }
+
+    } catch (error) {
+        console.error(`error: `,error);
+    }
+}
+
+//--------------------------------------------------------------R E N D E R I N G   S T A T S   D A T A------------------------------------------------
+
+function renderUserStats(userData){
+    const userTable= document.getElementsByClassName("user-table")[0];
+    console.log(userTable);
+    userTable.innerHTML= '';
+
+    if(userData.length<1)
+    {
+        userTable.innerHTML = `<p>No User Data Found</p>`
+    }
+    else{
+        userData.map(user=>{
+            const tablerRow=document.createElement("tr");
+            tablerRow.innerHTML=`<td>${user.userName}</td>
+                                 <td>${user.remainingCredit}</td>
+                                 <td>${user.totalScan}</td>`
+                     userTable.appendChild(tablerRow);            
+        });
+    }
+
+    }
+
+
+//---------------------------------------------------------- F E T C H I N G   T O P   U S E R S-----------------------------------------------------------
+
 async function fetchTopUsers() {
+    const token=localStorage.getItem("token");
     try {
         const response = await fetch('http://localhost:3000/topusers',{
-            method: "GET"
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
         }); // Replace with your backend route for top users
         const data = await response.json();
         console.log("Top Users:", data);
@@ -16,6 +76,9 @@ async function fetchTopUsers() {
         console.error('Error fetching top users:', error);
     }
 }
+
+//-----------------------------------------------------------R E N D E R   T O P   U S E R-------------------------------------------------------------
+
 function renderTopUsers(users) {
     const topUsersList = document.getElementsByClassName("topUsersList")[0];
     topUsersList.innerHTML = ''; // Clear any existing content
@@ -30,11 +93,19 @@ function renderTopUsers(users) {
         });
     }
 }
+
+//----------------------------------------------------F E T C H I N N G   C O M M O N    T O P I C S--------------------------------------------------------
+
 async function fetchTopTopics() {
+    const token=localStorage.getItem("token");
     try {
         const response = await fetch('http://localhost:3000/topic',{
-            method:"GET"
-        }); // Replace with your backend route for top topics
+            method:"GET",
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        }); 
         const data = await response.json();
         console.log("Top Topics:", data);
         renderTopTopics(data);
@@ -42,9 +113,12 @@ async function fetchTopTopics() {
         console.error('Error fetching top topics:', error);
     }
 }
+
+//--------------------------------------------------------R E N D E R I N G    C O M M O N    T O P I C S-----------------------------------------------------
+
 function renderTopTopics(topics) {
     const topTopicsList = document.getElementsByClassName("topTopicsList")[0];
-    topTopicsList.innerHTML = ''; // Clear any existing content
+    topTopicsList.innerHTML = ''; 
 
     if (topics.length < 1) {
         topTopicsList.innerHTML = `<p>No common searched topics available</p>`;
@@ -57,17 +131,29 @@ function renderTopTopics(topics) {
     }
 }
 
+
+//------------------------------------------------------F E T C H I N G    U S E R   R E Q U E S T -----------------------------------------------
+
 async function fetchUserRequests() {
+    const token=localStorage.getItem("token");
     try {
-        const response = await fetch('http://localhost:3000/getcreditrequest'); // Replace with your backend route
+        const response = await fetch('http://localhost:3000/getcreditrequest',{
+            headers: {
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
+        }); // Replace with your backend route
         const data = await response.json();
         console.log(data);
-        // Handle successful data retrieval
+
         renderRequests(data);
     } catch (error) {
         console.error('Error fetching user requests:', error);
     }
 }
+
+
+//-------------------------------------------------------------R E N D E R I N G   T H E   R E Q U E S T S----------------------------------------
 
 function renderRequests(users) {
     const mainDiv=document.getElementById("creditReq");
@@ -100,49 +186,76 @@ function renderRequests(users) {
     }
 }
 
+//-----------------------------------------------------H A N D L I N G   A P P R O V E    R E Q U E S T----------------------------------------------------------
+
 async function approveUser(userId) {
     const creditInput = document.getElementById(`creditInput-${userId}`);
     const assignedCredits = creditInput.value; 
-
-
-    console.log(`User ID: ${userId}, Assigned Credits: ${assignedCredits}`);
+ 
+    // console.log(`User ID: ${userId}, Assigned Credits: ${assignedCredits}`);
 
 try {
-    const response=await fetch(`http://localhost:3000/approve/?userId=${userId}`, {
-        method: 'POST',
+    const token=localStorage.getItem("token");
+
+    const response=await fetch(`http://localhost:3000/approve/${userId}`, {
+        method: 'PATCH',
         headers: {
-            'Content-Type': 'application/json',
+            "Authorization": `Bearer ${token}`,
+            "Content-Type": "application/json"
         },
         body: JSON.stringify({
-            credits: assignedCredits,
+            credits: Number(assignedCredits),
         })
     });
-    const data=await response.json()  ;
+    // const data=await response.json();
     if(response.status === 200)
         {
-            console.log("SUCCESSFULLY CRTEDITED");
+            console.log("SUCCESSFULLY CRedited");
+            removeUserDiv(userId);
         } 
 } catch (error) {
     console.error(error);
 }
 }
 
-async function rejectUser(userId) {
 
+
+//-----------------------------------------------H A N D L I N G    R E J EC T    R E Q U E ST-------------------------------------------------------
+
+async function rejectUser(userId) {
+    const token=localStorage.getItem("token");
     try {
-        const response=await fetch(`http://localhost:3000/decline/?userId=${userId}`, {
-            method: 'POST',
+        const response=await fetch(`http://localhost:3000/decline/${userId}`, {
+            method: 'PATCH',
             headers: {
-                'Content-Type': 'application/json',
-            },
+                "Authorization": `Bearer ${token}`,
+                "Content-Type": "application/json"
+            }
         });
-        const data=await response.json()  ;
+        // const data=await response.json()  ;
         if(response.status === 200)
             {
                 console.log("SDeclined Request");
+                removeUserDiv(userId);
             } 
     } catch (error) {
         console.error(error);
     }
     // console.log(`User ID ${userId} rejected`);
+}
+
+
+//-----------------------------------------------------R E M O V I N G    D I V    A F T E R   D E C I SI O N-------------------------------------------------------
+
+function removeUserDiv(userId){
+    const divId=document.querySelector(`[data-key="${userId}"]`);
+    if(divId)
+    {
+        divId.remove();
+        console.log("removed Div");
+    }
+    else{
+        console.log("could not delete");
+}
+
 }

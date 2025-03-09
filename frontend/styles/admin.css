@@ -52,7 +52,7 @@ table {
 }
 
 th, td {
-    /* color: white; */
+
     color: black;
     padding: 10px;
     border-bottom: 1px solid #ddd;
@@ -83,8 +83,6 @@ th {
     /* gap: 10px;  */
 }
 .request{
-    /* border: 2px solid white; */
-    /* background-color:#121212; */
     display: flex;
     width: 100%;
     gap: 10px;
@@ -92,9 +90,9 @@ th {
     color: black;
     justify-content: space-between;
     border-radius: 10px;
-}
-#creditInput{
-    width: 50px;
+} 
+input{
+    width:2rem;
     padding: 5px;
     font-size: 14px;
     border: 2px solid #ddd;
@@ -102,13 +100,14 @@ th {
     outline: none;
     transition: 0.3s;
     text-align: center;
-
 }
 .hrr{
     width: 100%;
 }
 .request h3,p{
     margin-left: .5rem;
+    width: 10rem;
+    word-wrap: break-word;
 }
 .decision-Btn{
     padding: 5px;

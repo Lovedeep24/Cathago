@@ -22,7 +22,7 @@
       "_id": "67cb337c0cd5fc1f3c3bd3c0",
       "userId": "67caa12af94b818eb0174954",
       "fileName": "ReactJs1",
-      "fileContent": "ReactJS is an open-source JavaScript library developed and maintained by Facebook, designed specifically for building fast, scalable, and interactive user interfaces. It is widely used for creating single-page applications (SPAs) and dynamic web applications due to its efficient rendering and component-based architecture. One of the core features of React is the virtual DOM, which improves performance by updating only the necessary parts of the UI instead of reloading the entire page. This makes React highly efficient, especially for applications that require frequent updates and dynamic content rendering.\r\n\r\nReact follows a component-based architecture, which allows developers to break down the UI into reusable, self-contained components. This modular approach improves code reusability, maintainability, and scalability, making it easier to develop and manage large applications. React also supports one-way data binding, which helps maintain a predictable flow of data, reducing potential errors and making debugging easier.\r\n\r\nAnother key feature of React is state management, which enables developers to handle dynamic data efficiently. While React has built-in state management using the useState and useReducer hooks, more complex applications often use external libraries like Redux, Recoil, or Context API for better state management across multiple components.\r\n\r\nAdditionally, React integrates seamlessly with other modern web technologies. It can be combined with React Router for navigation, Next.js for server-side rendering, and GraphQL for efficient data fetching. React is also widely adopted in mobile app development through React Native, which allows developers to build cross-platform mobile applications using the same React principles.\r\n\r\nWith its vast ecosystem, active community, and continuous updates, ReactJS remains one of the most preferred choices for front-end development, empowering developers to create high-performance, scalable, and engaging web applications.",
+      "fileContent": "ReactJS is an open-source JavaScript library developed and maintained by Facebook, designed specifically for building fast, scalable, and interactive user interfaces. It is widely used for creating single-page applications (SPAs) and dynamic web applications due to its efficient rendering and component-based architecture. One of the core features of React is the virtual DOM, which improves performance by updating only the necessary parts of the UI instead of reloading the entire page. This makes React highly efficient, especially for applications that require frequent updates and dynamic content rendering.\r\n\r\nReact follows a component-based architecture, which allows developers to break down the UI into reusable, self-contained components.",
       "topic": "ReactJS",
       "popularCount": 0,
       "createdAt": "2025-03-07T17:57:16.859Z"
@@ -35,6 +35,51 @@
       "topic": "Node.js",
       "popularCount": 0,
       "createdAt": "2025-03-07T17:57:30.127Z"
+    },
+    {
+      "_id": "67cd4b1e91231192993a47c7",
+      "userId": "67cbebe248a5d5e0489914e1",
+      "fileName": "mongo.txt",
+      "fileContent": "MongoDB is a NoSQL database designed for flexibility and scalability. Unlike traditional relational databases, it stores data in JSON-like BSON (Binary JSON) documents, allowing for dynamic schemas. This structure makes it ideal for handling unstructured or semi-structured data, enabling faster development and easier scaling. MongoDB supports powerful querying, indexing, and aggregation features, making it a preferred choice for applications requiring high performance, such as real-time analytics, content management systems, and cloud-based applications.",
+      "topic": "MongoDB",
+      "popularCount": 1,
+      "createdAt": "2025-03-09T08:02:38.866Z"
+    },
+    {
+      "_id": "67cd4e355bce20fcddc9ee69",
+      "userId": "67cbebe248a5d5e0489914e1",
+      "fileName": "mongo2.txt",
+      "fileContent": "One of MongoDB’s key advantages is its ability to scale horizontally using sharding, distributing data across multiple servers for improved performance and fault tolerance. It also provides built-in replication to ensure high availability. Developers appreciate its compatibility with modern programming languages like JavaScript, Python, and Node.js. Additionally, MongoDB offers advanced features like ACID transactions, full-text search, and time-series data handling, making it a versatile solution for various industries, including finance, e-commerce, and healthcare.",
+      "topic": "MongoDB",
+      "popularCount": 1,
+      "createdAt": "2025-03-09T08:15:49.450Z"
+    },
+    {
+      "_id": "67cd51b1e6dee1bee93070e3",
+      "userId": "67cbebe248a5d5e0489914e1",
+      "fileName": "mongo2.txt",
+      "fileContent": "One of MongoDB’s key advantages is its ability to scale horizontally using sharding, distributing data across multiple servers for improved performance and fault tolerance. It also provides built-in replication to ensure high availability. Developers appreciate its compatibility with modern programming languages like JavaScript, Python, and Node.js. Additionally, MongoDB offers advanced features like ACID transactions, full-text search, and time-series data handling, making it a versatile solution for various industries, including finance, e-commerce, and healthcare.",
+      "topic": "MongoDB",
+      "popularCount": 1,
+      "createdAt": "2025-03-09T08:30:41.058Z"
+    },
+    {
+      "_id": "67cd77ad99ff1cbe265e1a11",
+      "userId": "67cbebe248a5d5e0489914e1",
+      "fileName": "nodeNew.txt",
+      "fileContent": "Node.js is a runtime environment that allows JavaScript to run outside the browser, built on Chrome’s V8 engine. It enables server-side scripting, making JavaScript a full-stack language. Node.js uses an event-driven, non-blocking I/O model, making it efficient for handling multiple requests asynchronously. It supports frameworks like Express.js for building web applications and APIs. With npm (Node Package Manager), developers can access a vast library of packages. It’s widely used in web development, microservices, real-time applications, and backend services. Its scalability, performance, and lightweight nature make it a popular choice for modern web applications.",
+      "topic": "Node.js",
+      "popularCount": 2,
+      "createdAt": "2025-03-09T11:12:45.048Z"
+    },
+    {
+      "_id": "67cd7e06d8a7dc048c8aaca5",
+      "userId": "67cbebe248a5d5e0489914e1",
+      "fileName": "nodeNew.txt",
+      "fileContent": "Node.js is a runtime environment that allows JavaScript to run outside the browser, built on Chrome’s V8 engine. It enables server-side scripting, making JavaScript a full-stack language. Node.js uses an event-driven, non-blocking I/O model, making it efficient for handling multiple requests asynchronously. It supports frameworks like Express.js for building web applications and APIs. With npm (Node Package Manager), developers can access a vast library of packages. It’s widely used in web development, microservices, real-time applications, and backend services. Its scalability, performance, and lightweight nature make it a popular choice for modern web applications.",
+      "topic": "Node.js",
+      "popularCount": 2,
+      "createdAt": "2025-03-09T11:39:50.840Z"
     }
   ]
 }

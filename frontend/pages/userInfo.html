@@ -10,18 +10,36 @@
 <body>
     <div class="mainDiv">
         <div class="navbar">
-            <div class="greeting">Hello, <span id="userName">User</span>!</div>
+            <div class="greeting">Hello, <span id="userName"></span>!</div>
             <div class="profile-container">
-                <p><strong>Credits:</strong> <span id="creditDisplay">20</span></p>
-                <button class="btn" onclick="requestMoreCredits()">Request More Credits</button>
+                <p><strong>Credits:</strong> <span id="creditDisplay"></span></p>
+                <button class="btn" onclick="handleCreditReq()">Request More Credits</button>
+                <button onclick="handleScan()" class="btn">Scan a Document</button>
             </div>
         </div>
     
         <div class="searchSection">
-            <div class="searches">
-                <h3>Past Scans</h3>
-                <ul id="recentSearches">
-                    <li>No Past searches</li>
+            <div class="scans">
+                <h3>Past Scans Topics</h3>
+                <table >
+                    <thead>
+                        <tr>
+                            <th>Topic</th>
+                            <th>File Name</th>
+                            <th>Scanned at</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pastScans">
+                        <!-- <tr>
+                            <td>John Doe</td>
+                            <td>150</td>
+                            <td>150</td>
+                        </tr>
+                    
+                        </tr> -->
+                    </tbody>
+                </table>
+                <ul id="pastScans">        
                 </ul>
             </div>
             

@@ -1,13 +1,30 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const matchPercent = localStorage.getItem("matchPercent");
-    const matchfile = localStorage.getItem("matchContent");
-    const userfile = localStorage.getItem("userContent");
 
-    const userContent = document.querySelector(".userContent");
-    const matchContent = document.querySelector(".matchContent");
-    const matching = document.querySelector(".matching");
+document.addEventListener("DOMContentLoaded",scanDocument);
 
-    if (userContent) userContent.innerHTML = userfile || "No user content";
-    if (matching) matching.innerHTML = matchPercent || "No match percent";
-    if (matchContent) matchContent.innerHTML = matchfile || "No match content";
-});
+async function scanDocument(){
+    const userId=localStorage.getItem("userId");
+    console.log("userId",userId);
+    const docId=localStorage.getItem("docId");
+    console.log("docId:",docId);
+   const incomingData = localStorage.getItem("incomingData");
+   const matchPer = localStorage.getItem("matchPer");
+   const userContent = localStorage.getItem("userContent");
+   console.log("userContent:",userContent);
+   console.log("incomingData:",incomingData);
+   console.log("matchPer",matchPer);
+   console.log("docId:",docId);
+
+   const userData=document.getElementById("userContent");
+    userData.innerHTML=userContent;
+
+    const recievedData=document.getElementById("matchContent");
+    recievedData.innerHTML=incomingData;
+
+    const matchPercent=document.getElementById("matching");
+    matchPercent.innerHTML=matchPer;
+}
+
+
+function handleProfile(){
+    window.location.href = 'userInfo.html';
+}

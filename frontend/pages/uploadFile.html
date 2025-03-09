@@ -8,9 +8,15 @@
     <script defer src="../scripts/uploadFile.js"></script>
 </head>
 <body>
-    <div class="credit-container">
-        <span id="creditDisplay" value="20">Credits: 20</span>
-    </div>
+        <div class="credit-container">
+            <p>Credits:<span id="creditDisplay"></span></p>
+            <button id="req" onclick="handleCreditReq()">Request Credits</button>
+            <button id="navbar" onclick="handleProfile()">
+                User Profile
+            </button>
+        </div>
+  
+  
     <div class="upload-container">
         <p class="head">Scan the Document</p>
         <p class="desc">Upload or drag a text doucument file</p>
@@ -18,8 +24,8 @@
             <span class="slc">Select File</span>or Drop here
             <!-- <img id="previewImage" alt="Image Preview"> -->
         </div>
-        <input type="file" id="fileInput" style="display: none;">
-        <button class="btn" type="button" onclick="scanFile(event);  return false;">Submit</button>
+        <input type="file"  id="fileInput" style="display: none;">
+        <button id="btn" onclick="handleScan()" type="button">Scan</button>
     </div>
 
 </body>

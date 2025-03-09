@@ -13,6 +13,7 @@ body {
 .navbar{
     /* border: 2px solid red; */
     /* width: 100%; */
+    background-color: #6FD096;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -28,11 +29,18 @@ body {
 .profile-container {
     padding: 2px;
     height: auto;
+    /* background-color: black; */
     background-color: white;
-    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    gap: 5PX;
+    border: 2px solid white;
     color: black;
     border-radius: 10px;
     text-align: center;
+}
+#creditDisplay{
+    font-weight: bold;
 }
 .searchSection {
     background: white;
@@ -43,7 +51,24 @@ body {
     height: 90vh;
     padding: 20px;
 }
-.searches{
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    /* color: white; */
+    color: black;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background: #6FD096;
+    color: black;
+}
+.scans{
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
@@ -52,9 +77,9 @@ body {
 .btn {
     padding: 10px;
     border: none;
-    background:black;
-    color: white;
-    border: 1px solid white;
+    background:#6FD096;
+    color: black;
+    /* border: 1px solid white; */
     font-size: 16px;
     border-radius: 5px;
     cursor: pointer;

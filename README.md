@@ -18,16 +18,20 @@ This is a Node.js-based backend that manages user credits using a JSON file as a
    npm install
 3. *Clone the repository*
    ```sh
-   node index.js
+   node index.js
 
-   **LIVE LINK** https://docscanner.vercel.app/
-   **Credentials For User**
-   **email:** lovedeep24253@gmail.com
-   **password** 123
+## Live Link  
+🔗 https://docscanner.vercel.app/
 
-  **Credentials For Admin**
-   **email:** admin@gmail.com
-   **password** admin123
+## Credentials  
 
-   **You can finf txt file in testing folder which you can use for testing purpose**
-   
+### User Credentials  
+- *Email:* lovedeep24253@gmail.com  
+- *Password:* 123  
+
+### Admin Credentials  
+- *Email:* admin@gmail.com  
+- *Password:* admin123  
+
+## Testing  
+You can find sample text files in the **testing** folder, which can be used for testing document uploads and matching.

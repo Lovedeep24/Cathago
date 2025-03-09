@@ -32,7 +32,8 @@ async function fetchUserDetails(){
 //-------------------------------------------------R E N D E R I N G    U S E R     D A T A---------------------------------------------------
 function renderUserData(data){
     const credits=document.getElementById("creditDisplay");
-    credits.innerHTML=`${data.credits}`;
+    const creditLeft=localStorage.getItem("credits");
+    credits.innerHTML=(creditLeft);
 }
 
 //--------------------------------------------H A N D L I N G    C R E D I T S     R E Q U E S t-------------------------------------------
@@ -91,7 +92,9 @@ async function handleScan(){
     if (response.status === 200) {
         localStorage.setItem("incomingData", data.maxMatchContent);
         localStorage.setItem("matchPer", percent);
+        localStorage.setItem("credits", data.credits);
         // alert("SUCCESS");
+        location.reload();
         window.location.href = 'scan.html';
     } else {
         alert("Error in scanning, please try again.");

@@ -10,9 +10,6 @@ const Scan = readFile(FilePath);
 const fileController = {
     async upload(req,res,next){
         try {
-            // if (!req.body || req.body.length === 0) {
-            //     return res.status(400).json({ error: "No file uploaded" });
-            // }
             const userId = req.headers['userid'];
             const fileName = req.headers['filename'];
             fileContent = req.body.toString("utf-8");
@@ -69,7 +66,7 @@ const fileController = {
             User.users[userIndex].credits -= 1;
             User.users[userIndex].totalScan += 1;
             writeFile(User, userFilePath);
-            res.status(200).json({maxMatch,scannedFile:scan.fileContent,maxMatchContent});
+            res.status(200).json({maxMatch,scannedFile:scan.fileContent,maxMatchContent,credits: User.users[userIndex].credits });
         } catch (error) {
             // console.log(error);
             return res.status(500).json({"error": "Internal server error"})

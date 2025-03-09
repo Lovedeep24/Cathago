@@ -35,9 +35,9 @@ async function fetchUserDetails(){
 function renderUserData(data){
     const userName=document.getElementById("userName");
     userName.innerHTML=`${data.userName}`;
-
+    const creditLeft=localStorage.getItem("credits");
     const credits=document.getElementById("creditDisplay");
-    credits.innerHTML=`${data.credits}`;
+    credits.innerHTML=(creditLeft);
 
     const pastScansList=document.getElementById("pastScans");
     pastScansList.innerHTML='';

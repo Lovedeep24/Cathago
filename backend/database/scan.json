@@ -53,6 +53,15 @@
       "topic": "MongoDB",
       "popularCount": 1,
       "createdAt": "2025-03-09T08:15:49.450Z"
+    },
+    {
+      "_id": "67cdd1aa74354bf53acee04e",
+      "userId": "67cbebe248a5d5e0489914e1",
+      "fileName": "mongo.txt",
+      "fileContent": "MongoDB is a NoSQL database designed for flexibility and scalability. Unlike traditional relational databases, it stores data in JSON-like BSON (Binary JSON) documents, allowing for dynamic schemas. This structure makes it ideal for handling unstructured or semi-structured data, enabling faster development and easier scaling. MongoDB supports powerful querying, indexing, and aggregation features, making it a preferred choice for applications requiring high performance, such as real-time analytics, content management systems, and cloud-based applications.",
+      "topic": "MongoDB",
+      "popularCount": 1,
+      "createdAt": "2025-03-09T17:36:42.197Z"
     }
   ]
 }

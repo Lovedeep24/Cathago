@@ -4,7 +4,6 @@ document.addEventListener("DOMContentLoaded", ()=>{
 let requestStatus = null;
 
 
-
 //----------------------------------------------------------F E T C H I N G    U S E R      D A T A-------------------------------------------------------------------
 async function fetchUserDetails(){
     const token=localStorage.getItem("token");
